@@ -8,4 +8,4 @@ function sleep(time) {
   return new Promise(resolve => setTimeout(() => resolve(), time));
 }
 
-module.exports = { flatten, sleep };
+module.exports = {flatten, sleep};

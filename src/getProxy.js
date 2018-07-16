@@ -1,12 +1,12 @@
 const request = require('request-promise'),
   cheerio = require('cheerio'),
   ua = require('random-ua');
-const { flatten, sleep } = require('./utils');
+const {flatten, sleep} = require('../utils');
 
 const generateOpts = uri => ({
-  headers: { 'User-Agent': ua.generate() },
+  headers: {'User-Agent': ua.generate()},
   uri,
-  transform: body => cheerio.load(body)
+  transform: body => cheerio.load(body),
 });
 
 let fnList = {
@@ -26,7 +26,7 @@ let fnList = {
           .find('td');
         _portPool.push({
           ip: td.eq(1).text(),
-          port: td.eq(2).text()
+          port: td.eq(2).text(),
         });
       }
     }
@@ -42,7 +42,7 @@ let fnList = {
     let urlList = [
       'http://www.data5u.com/',
       'http://www.data5u.com/free/gngn/index.shtml',
-      'http://www.data5u.com/free/gnpt/index.shtml'
+      'http://www.data5u.com/free/gnpt/index.shtml',
     ];
     for (url of urlList) {
       let opts = generateOpts(url);
@@ -53,7 +53,7 @@ let fnList = {
           .find('li');
         _portPool.push({
           ip: li.eq(0).text(),
-          port: li.eq(1).text()
+          port: li.eq(1).text(),
         });
       }
     }
@@ -77,7 +77,7 @@ let fnList = {
           let td = tr.eq(i).find('td');
           _portPool.push({
             ip: td.eq(0).text(),
-            port: td.eq(1).text()
+            port: td.eq(1).text(),
           });
         }
       }
@@ -102,7 +102,7 @@ let fnList = {
       for (next of data.RESULT) {
         _portPool.push({
           ip: next.ip,
-          port: next.port
+          port: next.port,
         });
       }
       return _portPool;
@@ -127,7 +127,7 @@ let fnList = {
           let td = tr.eq(i).find('td');
           _portPool.push({
             ip: td.eq(1).text(),
-            port: td.eq(2).text()
+            port: td.eq(2).text(),
           });
         }
       }
@@ -142,7 +142,7 @@ let fnList = {
   sixthFreePort: async function() {
     let _portPool = [];
     return _portPool;
-  }
+  },
 };
 
 async function getAll() {
@@ -155,4 +155,4 @@ async function getAll() {
   }
 }
 
-module.exports = { fnList, getAll };
+module.exports = {fnList, getAll};
